@@ -5,8 +5,8 @@ import { Routes, RouterModule } from '@angular/router';
 import { AgregarComponent } from './pages/agregar/agregar.component';
 import { BuscarComponent } from './pages/buscar/buscar.component';
 import { HeroeComponent } from './pages/heroe/heroe.component';
-import { HomeComponent } from './pages/home/home.component';
 import { ListadoComponent } from './pages/listado/listado.component';
+import { HomeComponent } from './pages/home/home.component';
 
 const rutas: Routes = [
   {
@@ -22,7 +22,7 @@ const rutas: Routes = [
         component: AgregarComponent,
       },
       {
-        path: `editar/id`,
+        path: `editar/:id`,
         component: AgregarComponent,
       },
       {
@@ -30,7 +30,7 @@ const rutas: Routes = [
         component: BuscarComponent,
       },
       {
-        path: `id`,
+        path: `:id`,
         component: HeroeComponent,
       },
       {
