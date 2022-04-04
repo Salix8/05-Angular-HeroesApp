@@ -18,30 +18,15 @@
                    [matAutocomplete]="auto"
                    (input)="buscando()">
             <mat-autocomplete autoActiveFirstOption #auto="matAutocomplete" (optionSelected)="opcionSeleccionada( $event )">
+
               <mat-option *ngFor="let heroe of heroes" [value]="heroe">
-
-                <!-- <div *ngIf="heroes.length === 0; else ancla">
-                  {{ termino }}2
-                </div>
-                <ng-template #ancla>
-                  {{ heroe.superhero }}
-                </ng-template>
-
-                <div *ngIf="heroes.length <= 0; else ancla">
-                  {{ termino }}2
-                </div>
-                <ng-template #ancla>
-                  {{ heroe.superhero }}
-                </ng-template> -->
-
-                <div *ngIf="heroe.superhero; else ancla">
-                  {{ termino }} 2
-                </div>
-                <ng-template #ancla>
-                  {{ heroe.superhero }}
-                </ng-template>
-
+                {{ heroe.superhero }}
               </mat-option>
+
+              <mat-option value="" *ngIf="heroes.length === 0 && termino.trim().length > 0">
+                No se encontró nada con el término {{ termino }}
+              </mat-option>
+
             </mat-autocomplete>
         </mat-form-field>
     </div>

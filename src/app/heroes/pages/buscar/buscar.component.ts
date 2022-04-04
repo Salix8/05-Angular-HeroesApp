@@ -12,24 +12,37 @@ export class BuscarComponent implements OnInit {
 
   termino: string = ``;
   heroes: Heroe[] = [];
-  heroeSeleccionado !: Heroe;
+  heroeSeleccionado: Heroe | undefined;
+  filteredList: Heroe[] = [];
 
   constructor( private heroesService: HeroesService) { }
 
   ngOnInit(): void {
+    // this.heroesService.getSugerencias( "" )
+    // .subscribe( heroes => 
+    //   this.heroes = heroes
+    // );
+
+
+    // this.filteredList= this.heroes.filter( heroe => {
+    //   return heroe.superhero.toLowerCase().includes(event);
+    // });
   }
 
   buscando() {
-    this.heroesService.getSugerencias( this.termino )
-      .subscribe( heroes => this.heroes = heroes);
+    this.heroesService.getSugerencias( this.termino.trim() )
+      .subscribe( heroes => this.heroes = heroes );
   }
 
-  opcionSeleccionada( event: MatAutocompleteSelectedEvent ){
-    const heroe = event.option.value;
+  opcionSeleccionada( event: MatAutocompleteSelectedEvent){
+    if (!event.option.value) { 
+      this.heroeSeleccionado = undefined;
+      return; 
+    }
+    const heroe: Heroe = event.option.value;
     this.termino = heroe.superhero;
-    this.heroesService.getHeroePorId( heroe.id )
-    .subscribe( heroe => this.heroeSeleccionado = heroe );
-    console.log()
+    this.heroesService.getHeroePorId( heroe.id! )
+      .subscribe( heroe => this.heroeSeleccionado = heroe );
     
   }
 
